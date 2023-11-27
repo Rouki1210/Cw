@@ -48,8 +48,8 @@ class UpdateVideo:
             if lib.get_rating(key):
                 lib.set_rating(key, new_rating)
                 messagebox.showinfo("Success","Video updated successfully")
-                self.txt_vid_number.delete(1.0, tk.END)
-                self.txt_new_rating.delete(1.0, tk.END)
+                self.txt_vid_number.delete("0", tk.END)
+                self.txt_new_rating.delete("0", tk.END)
                 set_text(self.video_txt, "")
             else:
                 set_text(self.video_txt, f'Video {key} not found')
