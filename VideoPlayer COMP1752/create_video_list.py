@@ -24,14 +24,17 @@ class CreateVideo:
         
         # Create 
         self.video_number_entry = tk.Entry(window, width=3)
-        self.video_number_entry.grid(row= 1, column=5, padx=10, pady=10)
+        self.video_number_entry.grid(row= 1, column=5, padx=5, pady=5)
         
         # Create add button
         self.btn_add_video = tk.Button(window, width=12, height=1, text="Add to playlist", command=self.add_video)
         self.btn_add_video.grid(row=1, column=4, padx=10, pady=10)
+        self.btn_add_video = tk.Button(window, width=12, height=1, text="Remove video", command=self.remove_video)
+        self.btn_add_video.grid(row=1, column=6, columnspan=6, padx=10, pady=10)
+        
         
         self.btn_play_video = tk.Button(window, width=5, text="Play", command=self.play_playlist)
-        self.btn_play_video.grid(row=4, column=5, rowspan=9, sticky="S", padx= 10, pady= 10)
+        self.btn_play_video.grid(row=4, column=5, rowspan=9, sticky="S", padx= 15, pady= 10)
         self.btn_reset_video = tk.Button(window, width=5, text="Reset", command=self.reset_playlist)
         self.btn_reset_video.grid(row=4, column=7, rowspan=9, sticky="S", padx=10, pady=10)
     
@@ -62,6 +65,14 @@ class CreateVideo:
             self.update_playlist_text()
         else:
             self.display_error_message("Invalid video number")
+            
+    def remove_video(self):
+        if self.playlist:
+            video_number = self.video_number_entry.get()
+            name = lib.get_name(video_number)
+            if name in self.playlist:
+                self.playlist.remove(name)
+                self.update_playlist_text()
         
     def play_playlist(self):
         for video_name in self.playlist:
