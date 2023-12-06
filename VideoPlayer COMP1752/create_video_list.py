@@ -79,7 +79,7 @@ class CreateVideo:
             self.list_videos_clicked()
         else:
             self.display_error_message("Invalid video number")
-            
+                
     def remove_video(self):
         if self.playlist:
             video_number = self.video_number_entry.get()
@@ -93,8 +93,7 @@ class CreateVideo:
             lib.increment_play_count(video_name)
             print(f'{video_name}, {lib.increment_play_count(video_name)}')
             
-            
-            
+        
     def reset_playlist(self):
         self.playlist.clear()
         self.playlist_text.delete(1.0, tk.END)

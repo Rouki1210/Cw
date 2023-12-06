@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "VideoPlayer COMP1752"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
