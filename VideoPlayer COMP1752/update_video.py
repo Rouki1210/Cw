@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 
 import video_library as lib
+import font_manager as fonts
 
 def set_text(text_area, content):   #Set text when open label
     text_area.delete("1.0", tk.END) #Delete previous content
@@ -9,7 +10,7 @@ def set_text(text_area, content):   #Set text when open label
 
 class UpdateVideo:
     def __init__(self, window):
-        window.geometry('300x300')
+        window.geometry('350x325')
         window.title('Update Video')
         
         lbl_vid_number = ttk.Label(window, text="Enter Video Number:")
@@ -30,11 +31,11 @@ class UpdateVideo:
         self.video_txt.grid(row=3, column=0, padx=10, pady=10, columnspan=2)
 
         # Update button
-        btn_update = ttk.Button(window, text="Update", command=self.update_rate)
+        btn_update = ttk.Button(window, text="Update", width=7, command=self.update_rate)
         btn_update.grid(row=4, column=0, padx=20, pady=10, sticky="W")
 
         # Check button
-        btn_check = ttk.Button(window, text="Check", command=self.check_video_clicked)
+        btn_check = ttk.Button(window, text="Check", width=7, command=self.check_video_clicked)
         btn_check.grid(row=4, column=1, padx=20, pady=10, sticky="W")
         
         self.status_lbl = tk.Label(window, text="", font=("Helvetica", 10)) #Create a label show to info video
@@ -72,5 +73,6 @@ class UpdateVideo:
         
 if __name__ == "__main__":  # only runs when this file is run as a standalone
     window = tk.Tk()        # create a TK object    
+    fonts.configure()
     UpdateVideo(window)     # open the UpdateVideo GUI
     window.mainloop()  

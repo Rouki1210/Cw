@@ -21,6 +21,7 @@ class CreateVideo:
         self.list_txt.grid(row=3, column=0, sticky="E", columnspan=5, rowspan=10, padx=10, pady=10)
         self.playlist_text = tkst.ScrolledText(window, width=20, height=5, wrap="none")
         self.playlist_text.grid(row=2, column=5, sticky="W", columnspan=5, rowspan=10, padx=10, pady=10)
+        self.playlist_text.tag_configure('clickable')
         
         # Create 
         self.video_number_entry = tk.Entry(window, width=3)
@@ -50,8 +51,10 @@ class CreateVideo:
     # Update the list widget with video list
     def update_playlist_text(self):
         self.playlist_text.delete(1.0, tk.END)
+        self.playlist_text.tag_bind("clickable", "<Button-1>", self.add_video_clicked)
         for video_name in self.playlist:
             self.playlist_text.insert(tk.END, f"{video_name}\n")
+
 
     def display_error_message(self, message):
         error_msg = tk.Label(window, text=f'Error: {message}', fg='red')
@@ -66,6 +69,17 @@ class CreateVideo:
         else:
             self.display_error_message("Invalid video number")
             
+    def add_video_clicked(self, event):
+        index = self.list_txt.index(tk.CURRENT)
+        key = index.split(' ')[0].zfill(2)
+        name = lib.get_name(key)
+        if name is not None:
+            self.playlist.append(name)
+            self.update_playlist_text()
+            self.list_videos_clicked()
+        else:
+            self.display_error_message("Invalid video number")
+            
     def remove_video(self):
         if self.playlist:
             video_number = self.video_number_entry.get()
@@ -76,8 +90,9 @@ class CreateVideo:
         
     def play_playlist(self):
         for video_name in self.playlist:
-            lib.get_play_count(video_name)
-            lib.increment_play_count(video_name)
+            lib.get(video_name)
+            print(f'{video_name}, {lib.increment_play_count(video_name)}')
+            
             
             
     def reset_playlist(self):
