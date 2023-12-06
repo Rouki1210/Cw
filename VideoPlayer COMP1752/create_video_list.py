@@ -90,7 +90,7 @@ class CreateVideo:
         
     def play_playlist(self):
         for video_name in self.playlist:
-            lib.get(video_name)
+            lib.increment_play_count(video_name)
             print(f'{video_name}, {lib.increment_play_count(video_name)}')
             
             

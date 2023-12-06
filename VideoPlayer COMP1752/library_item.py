@@ -13,8 +13,3 @@ class LibraryItem:
         for i in range(self.rating):
             stars += "*"
         return stars
-    @play_count .setter
-    def play_count(self, value)
-        if value <= 0:
-            raise ValueError('Play count must be position')
-        
