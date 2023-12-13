@@ -24,6 +24,8 @@ window = tk.Tk()
 window.geometry("520x150")
 window.title("Video Player")
 
+
+
 fonts.configure()
 
 header_lbl = tk.Label(window, text="Select an option by clicking one of the buttons below")

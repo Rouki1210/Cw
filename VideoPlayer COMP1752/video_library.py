@@ -63,3 +63,14 @@ def increment_play_count(key):
         item.play_count += 1
     except KeyError:
         return
+
+def get_most_rating_video():
+    if not library:
+        return None
+    max_rating_item = max(library.values(), key=lambda item: item.rating)
+    return {
+        "name": max_rating_item.name,
+        "director": max_rating_item.director,
+        "rating": max_rating_item.rating,
+        "play_count": max_rating_item.play_count
+    }

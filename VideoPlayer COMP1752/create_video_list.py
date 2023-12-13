@@ -1,9 +1,10 @@
 import tkinter as tk
 import tkinter.scrolledtext as tkst
+from tkinter import messagebox as msb
 
 import video_library as lib
 import font_manager as fonts
-
+video_store = {}
 
 def set_text(text_area, content):   #Set text when open label
     text_area.delete("1.0", tk.END) #Delete previous content
@@ -66,12 +67,12 @@ class CreateVideo:
         if name is not None:
             self.playlist.append(name)
             self.update_playlist_text()
+            video_store[video_number] = name
         else:
             self.display_error_message("Invalid video number")
             
     def add_video_clicked(self, event):
-        index = self.list_txt.index(tk.CURRENT)
-        key = index.split(' ')[0].zfill(2)
+        key = self.list_txt.get()
         name = lib.get_name(key)
         if name is not None:
             self.playlist.append(name)
@@ -89,9 +90,9 @@ class CreateVideo:
                 self.update_playlist_text()
         
     def play_playlist(self):
-        for video_name in self.playlist:
-            lib.increment_play_count(video_name)
-            print(f'{video_name}, {lib.increment_play_count(video_name)}')
+        for key in video_store.items():
+            lib.increment_play_count(key)
+        msb.showinfo('Success', 'Play count updated successfully')
             
         
     def reset_playlist(self):
